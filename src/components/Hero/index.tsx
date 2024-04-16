@@ -1,24 +1,45 @@
-import { Imagem, Precos, Titulo } from './styles'
-import bannerImg from '../../assets/images/banner-homem-aranha.png'
-import Tag from '../Tag'
+import bannerImg from '../../assets/images/fundo_hogwarts.png'
+import { Game } from '../../pages/Home'
 import Button from '../Button'
+import { formataPreco } from '../ListaDeProdutos'
+import Tag from '../Tag'
+import { Banner, Infos } from './styles'
 
-const Banner = () => (
-  <Imagem style={{ backgroundImage: `url(${bannerImg})` }}>
-    <div className="container">
-      <Tag size="big">Destaque do dia</Tag>
-      <div>
-        <Titulo>Marvel&apos;s Spider-Man: Miles Morales PS4 e PS5</Titulo>
-        <Precos>
-          De <span>R$ 250,00</span> <br />
-          por apenas R$ 99,90
-        </Precos>
+type Props = {
+  game: Game
+}
+
+const Hero = ({ game }: Props) => {
+  return (
+    <Banner style={{ backgroundImage: `url(${game.media.cover})` }}>
+      <div className="container">
+        <div>
+          <Tag>{game.details.category}</Tag>
+          <Tag>{game.details.system}</Tag>
+        </div>
+
+        <Infos>
+          <h2>{game.name}</h2>
+          <p>
+            {game.prices.discount && (
+              <span>De {formataPreco(game.prices.old)} </span>
+            )}
+            {game.prices.current && (
+              <>Por {formataPreco(game.prices.current)}</>
+            )}
+          </p>
+          {game.prices.current && (
+            <Button
+              variant="primary"
+              type="button"
+              title="Clique aqui para adicionar ao Carrinho"
+            >
+              Adicionar ao carrinho
+            </Button>
+          )}
+        </Infos>
       </div>
-      <Button type="link" title="" to="/produto">
-        Aproveitar
-      </Button>
-    </div>
-  </Imagem>
-)
-
-export default Banner
+    </Banner>
+  )
+}
+export default Hero

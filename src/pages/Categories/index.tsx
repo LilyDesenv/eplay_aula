@@ -1,105 +1,51 @@
+import { useEffect, useState } from 'react'
 import ListaDeProdutos from '../../components/ListaDeProdutos'
-import Game from '../../models/Game'
-import resident from '../../assets/images/resident.png'
-import diablo from '../../assets/images/diablo.png'
-import zelda from '../../assets/images/zelda.png'
-import star_wars from '../../assets/images/star_wars.png'
+import { Game } from '../../pages/Home'
 
-const promocoes: Game[] = [
-  {
-    id: 1,
-    title: 'Resident Evil 4 - Remake',
-    category: 'Ação',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae vitae autem, voluptatem temporibus ex sequi deleniti voluptatibus deserunt fugiat veritatis vel eos alias, cumque quasi quas molestias dignissimos optio cupiditate.',
-    image: resident,
-    infos: ['10%', 'R$250'],
-    system: 'Windows'
-  },
+const Categories = () => {
+  const [gamesAcao, setGamesAcao] = useState<Game[]>([])
+  const [gamesEsportes, setGamesEsportes] = useState<Game[]>([])
+  const [gamesSimulacao, setGamesSimulacao] = useState<Game[]>([])
+  const [gamesLuta, setGamesLuta] = useState<Game[]>([])
+  const [gamesRPG, setGamesRPG] = useState<Game[]>([])
 
-  {
-    id: 2,
-    title: 'Resident Evil 4 - Remake',
-    category: 'Aventura',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae vitae autem, voluptatem temporibus ex sequi deleniti voluptatibus deserunt fugiat veritatis vel eos alias, cumque quasi quas molestias dignissimos optio cupiditate.',
-    image: star_wars,
-    infos: ['5%', 'R$290'],
-    system: 'PS5'
-  },
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/eplay/acao')
+      .then((res) => res.json())
+      .then((res) => setGamesAcao(res))
 
-  {
-    id: 3,
-    title: 'Resident Evil 4 - Remake',
-    category: 'Ação',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae vitae autem, voluptatem temporibus ex sequi deleniti voluptatibus deserunt fugiat veritatis vel eos alias, cumque quasi quas molestias dignissimos optio cupiditate.',
-    image: resident,
-    infos: ['10%', 'R$250'],
-    system: 'PS5'
-  },
+    fetch('https://fake-api-tau.vercel.app/api/eplay/esportes')
+      .then((res) => res.json())
+      .then((res) => setGamesEsportes(res))
 
-  {
-    id: 4,
-    title: 'Resident Evil 4 - Remake',
-    category: 'Ação',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae vitae autem, voluptatem temporibus ex sequi deleniti voluptatibus deserunt fugiat veritatis vel eos alias, cumque quasi quas molestias dignissimos optio cupiditate.',
-    image: star_wars,
-    infos: ['10%', 'R$250'],
-    system: 'PS5'
-  }
-]
+    fetch('https://fake-api-tau.vercel.app/api/eplay/simulacao')
+      .then((res) => res.json())
+      .then((res) => setGamesSimulacao(res))
 
-const emBreve: Game[] = [
-  {
-    id: 5,
-    title: 'Legend of Zelda',
-    category: 'Aventura',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae vitae autem, voluptatem temporibus ex sequi deleniti voluptatibus deserunt fugiat veritatis vel eos alias, cumque quasi quas molestias dignissimos optio cupiditate.',
-    image: zelda,
-    infos: ['25/07'],
-    system: 'Windows'
-  },
-  {
-    id: 6,
-    title: 'Diablo 4',
-    category: 'RPG',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae vitae autem, voluptatem temporibus ex sequi deleniti voluptatibus deserunt fugiat veritatis vel eos alias, cumque quasi quas molestias dignissimos optio cupiditate.',
-    image: diablo,
-    infos: ['17/05'],
-    system: 'Windows'
-  },
-  {
-    id: 7,
-    title: 'Legend of Zelda',
-    category: 'Aventura',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae vitae autem, voluptatem temporibus ex sequi deleniti voluptatibus deserunt fugiat veritatis vel eos alias, cumque quasi quas molestias dignissimos optio cupiditate.',
-    image: zelda,
-    infos: ['25/07'],
-    system: 'Windows'
-  },
-  {
-    id: 8,
-    title: 'Diablo 4',
-    category: 'RPG',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae vitae autem, voluptatem temporibus ex sequi deleniti voluptatibus deserunt fugiat veritatis vel eos alias, cumque quasi quas molestias dignissimos optio cupiditate.',
-    image: diablo,
-    infos: ['17/05'],
-    system: 'Windows'
-  }
-]
+    fetch('https://fake-api-tau.vercel.app/api/eplay/luta')
+      .then((res) => res.json())
+      .then((res) => setGamesLuta(res))
 
-const Categories = () => (
-  <>
-    <ListaDeProdutos games={promocoes} title="RPG" background="gray" />
-    <ListaDeProdutos games={emBreve} title="Ação" background="black" />
-    <ListaDeProdutos games={promocoes} title="Aventura" background="gray" />
-    <ListaDeProdutos games={emBreve} title="FPS" background="black" />
-  </>
-)
+    fetch('https://fake-api-tau.vercel.app/api/eplay/rpg')
+      .then((res) => res.json())
+      .then((res) => setGamesRPG(res))
+  }, [])
+  return (
+    <>
+      <ListaDeProdutos games={gamesRPG} title="RPG" background="black" />
+      <ListaDeProdutos games={gamesAcao} title="Ação" background="gray" />
+      <ListaDeProdutos
+        games={gamesEsportes}
+        title="Esportes"
+        background="black"
+      />
+      <ListaDeProdutos
+        games={gamesSimulacao}
+        title="Simulação"
+        background="gray"
+      />
+      <ListaDeProdutos games={gamesLuta} title="Luta" background="black" />
+    </>
+  )
+}
 export default Categories
