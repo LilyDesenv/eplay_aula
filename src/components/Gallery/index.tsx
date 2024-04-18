@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import Section from '../Section'
 import { Item, Items, Action, Modal, ModalContent } from './styles'
-import zelda from '../../assets/images/zelda.png'
-import hogwarts from '../../assets/images/fundo_hogwarts.png'
 import play from '../../assets/images/play.png'
 import zoom from '../../assets/images/zoom.png'
 import fechar from '../../assets/images/fechar.png'

@@ -1,19 +1,19 @@
 import { Imagem, Precos, Titulo } from './styles'
-import bannerImg from '../../assets/images/banner-homem-aranha.png'
 import Tag from '../Tag'
 import Button from '../Button'
-import { useEffect, useState } from 'react'
-import { Game } from '../../pages/Home'
 import { formataPreco } from '../ListaDeProdutos'
+import { useGetFeaturedGameQuery } from '../../services/api'
 
 const Banner = () => {
-  const [game, setGame] = useState<Game>()
+  const { data: game, isLoading } = useGetFeaturedGameQuery()
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/eplay/destaque')
-      .then((res) => res.json())
-      .then((res) => setGame(res))
-  }, [])
+  // const [game, setGame] = useState<Game>()
+
+  // useEffect(() => {
+  //   fetch('https://fake-api-tau.vercel.app/api/eplay/destaque')
+  //     .then((res) => res.json())
+  //     .then((res) => setGame(res))
+  // }, [])
 
   if (!game) {
     return <h3>Carregando...</h3>

@@ -14,6 +14,7 @@ export const BotaoContainer = styled.button<Props>`
   text-decoration: none;
   border-radius: 8px;
   color: ${cores.branca};
+  cursor: pointer;
 `
 
 export const BotaoLink = styled(Link)`
