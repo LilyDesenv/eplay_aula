@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { store } from './store'
 import Header from './components/Header'
 import { GlobalCSS } from './styles'
-import Rotas from './routes'
+import Routes from './routes'
 import Footer from './components/Footer'
 import Cart from './components/Cart'
 
@@ -15,7 +15,7 @@ function App() {
         <div className="container">
           <Header />
         </div>
-        <Rotas />
+        <Routes />
         <Footer />
         <Cart />
       </BrowserRouter>

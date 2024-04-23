@@ -1,12 +1,13 @@
-import { BotaoContainer, BotaoLink } from './styles'
+import * as S from './styles'
 
 export type Props = {
-  type: 'button' | 'link'
+  type: 'button' | 'link' | 'submit'
   title: string
   to?: string
   onClick?: () => void
   children: string
   variant?: 'primary' | 'secondary'
+  disabled?: boolean
 }
 
 const Button = ({
@@ -15,24 +16,26 @@ const Button = ({
   to,
   children,
   onClick,
-  variant = 'primary'
+  variant = 'primary',
+  disabled
 }: Props) => {
-  if (type === 'button') {
+  if (type === 'button' || type === 'submit') {
     return (
-      <BotaoContainer
+      <S.ButtonContainer
         variant={variant}
-        type="button"
+        type={type}
         title={title}
         onClick={onClick}
+        disabled={disabled}
       >
         {children}
-      </BotaoContainer>
+      </S.ButtonContainer>
     )
   }
   return (
-    <BotaoLink to={to as string} title={title}>
+    <S.ButtonLink to={to as string} title={title}>
       {children}
-    </BotaoLink>
+    </S.ButtonLink>
   )
 }
 
